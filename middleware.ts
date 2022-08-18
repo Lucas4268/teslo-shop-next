@@ -58,12 +58,12 @@ export const middleware = async( req: NextRequest ) => {
     const { pathname, origin } = req.nextUrl.clone();
 
     if ( !session ) {
-      return NextResponse.rewrite(`${ origin }/auth/login`);
+      return NextResponse.redirect(`${ origin }/auth/login`);
     };
     
     const validRoles = ['admin', 'SEO'];
     if ( !validRoles.includes( session.user.role ) ) {
-      return NextResponse.rewrite(`${ origin }/`);
+      return NextResponse.redirect(`${ origin }/`);
     };
 
     return NextResponse.next();
