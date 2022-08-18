@@ -20,7 +20,7 @@ export const middleware = async( req: NextRequest ) => {
     //   return NextResponse.redirect(`${ origin }/auth/login?p=${ pathname }`)
     // }
 
-    const session = await getToken({ req, secret: process.env.JWT_SECRET_SEED })
+    const session = await getToken({ req, secret: process.env.NEXTAUTH_SECRET })
 
     if ( !session ) {
       const { pathname, origin } = req.nextUrl.clone()
@@ -34,7 +34,7 @@ export const middleware = async( req: NextRequest ) => {
 
   // ####################################### paginas dentro de admin #######################################
   if ( req.nextUrl.pathname.startsWith('/admin' )) {
-    const session: any = await getToken({ req, secret: process.env.JWT_SECRET_SEED });
+    const session: any = await getToken({ req, secret: process.env.NEXTAUTH_SECRET });
     const { pathname, origin } = req.nextUrl.clone();
 
     if ( !session ) {
@@ -54,7 +54,7 @@ export const middleware = async( req: NextRequest ) => {
 
   // ####################################### api de admin #######################################
   if ( req.nextUrl.pathname.startsWith('/api/admin' )) {
-    const session: any = await getToken({ req, secret: process.env.JWT_SECRET_SEED });
+    const session: any = await getToken({ req, secret: process.env.NEXTAUTH_SECRET });
     const { pathname, origin } = req.nextUrl.clone();
 
     if ( !session ) {
